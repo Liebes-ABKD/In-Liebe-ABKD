@@ -1,6 +1,6 @@
-# abkd-ichliebedich – Online-Umfrage
+# Liebes ABKD / In Liebe ABKD – Online-Umfrage
 
-Statische Umfrage-Webseite (HTML, CSS, JavaScript) für die Publikation „abkd-ichliebedich“. Die Antworten landen über ein Google Apps Script in einem Google Sheet, die Zeichnungen als SVG und PNG im Drive-Ordner „Zeichnungen“.
+Statische Umfrage-Webseite (HTML, CSS, JavaScript) für die Publikation „Liebes ABKD / In Liebe ABKD“, einen kollektiven (Liebes-)Brief an ABKD. Die Antworten landen über ein Google Apps Script in einem Google Sheet, die Zeichnungen als SVG und PNG im Drive-Ordner „Zeichnungen“.
 
 ---
 
@@ -41,7 +41,7 @@ Statische Umfrage-Webseite (HTML, CSS, JavaScript) für die Publikation „abkd-
     └── Saetze.gs   = derselbe Inhalt wie saetze.js
 ```
 
-Alle Pfade auf der Seite sind relativ (`./style.css`), deshalb läuft die Seite ohne Änderungen lokal, unter `abkd-ichliebedich.github.io/abkd-ichliebedich/` und später unter eurer eigenen Domain. Einzige Ausnahme ist die Link-Vorschau-Angabe `og:url` in `index.html`: WhatsApp & Co. verlangen dort eine volle Adresse (siehe [Abschnitt 13](#13-später-eigene-domain-verbinden)).
+Alle Pfade auf der Seite sind relativ (`./style.css`), deshalb läuft die Seite ohne Änderungen lokal, unter `liebes-abkd.github.io/In-Liebe-ABKD/` und später unter eurer eigenen Domain. Einzige Ausnahme ist die Link-Vorschau-Angabe `og:url` in `index.html`: WhatsApp & Co. verlangen dort eine volle Adresse (siehe [Abschnitt 13](#13-später-eigene-domain-verbinden)).
 
 Die Seite lädt nichts von fremden Servern: keine CDNs, kein Google Fonts, kein Tracking. Die einzige Verbindung nach außen ist das Absenden an euer Apps Script.
 
@@ -136,7 +136,7 @@ Alles im **Google-Projekt-Account**.
    - **Zugriff: Jeder** (wirklich „Jeder“, nicht „Jeder mit Google-Konto“)
 4. **Bereitstellen** → ggf. Zugriff autorisieren (wie in Abschnitt 5).
 5. Die **Web-App-URL** kopieren. Sie endet auf `/exec`.
-6. Kurztest: Die URL im Browser öffnen. Dort sollte „läuft – Umfrage-Backend abkd-ichliebedich“ stehen.
+6. Kurztest: Die URL im Browser öffnen. Dort sollte „läuft – Umfrage-Backend abkd-ichliebedich“ stehen (der alte Projektname im Script ist nur ein Text und kann so bleiben).
 7. In `config.js` eintragen:
    `var WEB_APP_URL = "https://script.google.com/macros/s/…/exec";`
 
@@ -160,7 +160,7 @@ Legt danach auch die geänderte Datei in `apps-script/` im Repository ab, damit 
 
 ## 8. Dateien ins GitHub-Repository hochladen
 
-Repository: Organisation **abkd-ichliebedich**, Repository **abkd-ichliebedich**.
+Repository: Organisation **liebes-abkd**, Repository **In-Liebe-ABKD**. Lokaler Ordner (GitHub Desktop): `Dokumente/GitHub/In-Liebe-ABKD`.
 
 **Variante A: im Browser**
 
@@ -172,7 +172,7 @@ Repository: Organisation **abkd-ichliebedich**, Repository **abkd-ichliebedich**
 **Variante B: GitHub Desktop**
 
 1. GitHub Desktop installieren, anmelden.
-2. **File → Clone repository** → `abkd-ichliebedich/abkd-ichliebedich` → einen Speicherort wählen.
+2. **File → Clone repository** → `liebes-abkd/In-Liebe-ABKD` → einen Speicherort wählen.
 3. Die Projektdateien in diesen Ordner kopieren (bzw. dort weiterarbeiten).
 4. In GitHub Desktop erscheinen die Änderungen. Unten links eine Beschreibung eintragen → **Commit to main** → oben **Push origin**.
 
@@ -187,7 +187,7 @@ Nach dem Hochladen dauert es 1–2 Minuten, bis die Seite aktualisiert ist. Fall
 2. **Settings → Pages**
 3. Bei „Build and deployment“: Source **Deploy from a branch**, Branch **main**, Ordner **/ (root)** → **Save**.
 4. Nach 1–2 Minuten ist die Seite erreichbar unter
-   **https://abkd-ichliebedich.github.io/abkd-ichliebedich/**
+   **https://liebes-abkd.github.io/In-Liebe-ABKD/**
 
 ---
 
@@ -202,7 +202,7 @@ Alles in `config.js` (nach jeder Änderung hochladen):
 | `"live"` | Echte Einsendungen | keiner |
 
 **Testen trotz Live-Modus:** `?test=1` an die Adresse hängen, z. B.
-`https://abkd-ichliebedich.github.io/abkd-ichliebedich/?test=1`
+`https://liebes-abkd.github.io/In-Liebe-ABKD/?test=1`
 Dann wird als Test gesendet und der Hinweis „Testmodus“ erscheint.
 
 **Testdaten löschen:** Im Sheet **Umfrage → Testdaten löschen** → Sicherheitsabfrage mit „Ja“ bestätigen. Gelöscht werden nur Zeilen mit `test = WAHR` in „Teilnahmen“ und „Antworten“ sowie alle Dateien, deren Name mit `TEST_` beginnt (sie landen im Drive-Papierkorb und lassen sich dort 30 Tage lang wiederherstellen). Echte Einsendungen werden nie angefasst. Am Ende zeigt eine Meldung, wie viel gelöscht wurde.
@@ -276,7 +276,7 @@ Die Zeichnungen sind schwarz auf transparentem Grund. PNG ist 2000 px breit, SVG
 ## 13. Später: eigene Domain verbinden
 
 1. Bei eurem Domain-Anbieter einen DNS-Eintrag anlegen:
-   - für eine **Subdomain** (z. B. `umfrage.eure-domain.de`): einen **CNAME** auf `abkd-ichliebedich.github.io`
+   - für eine **Subdomain** (z. B. `umfrage.eure-domain.de`): einen **CNAME** auf `liebes-abkd.github.io`
    - für die **Hauptdomain** (`eure-domain.de`): vier **A-Einträge** auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 2. Im Repository: **Settings → Pages → Custom domain** → Domain eintragen → **Save**. GitHub legt dabei automatisch eine Datei `CNAME` im Repository an. Die nicht löschen.
 3. Wenn die Prüfung durch ist (kann bis zu einem Tag dauern): **Enforce HTTPS** anhaken.
