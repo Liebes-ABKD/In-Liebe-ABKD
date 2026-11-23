@@ -1,0 +1,19 @@
+In diesen Ordner gehören die Schriftdateien (WOFF2) und ihre Lizenzen.
+
+Erwartete Dateinamen (dann muss fonts.css nicht geändert werden):
+
+  pinyon-script-v24-latin-regular.woff2   (Schreibschrift, aktuell verwendet)
+  Ballet-Regular.woff2                    (frühere Schreibschrift, optional)
+  Inter-Regular.woff2
+  (oder stattdessen: InterVariable.woff2 – siehe Alternative in fonts.css)
+
+Inter-Medium.woff2 wird nicht mehr verwendet und kann gelöscht werden.
+
+Lizenzen (beide Schriften stehen unter der SIL Open Font License):
+
+  OFL.txt          (Ballet)
+  Pinyon_OFL.txt   (Pinyon Script)
+  OFL-Inter.txt    (Inter – die Lizenzdatei aus dem Inter-Download, umbenannt,
+                    damit sie die von Ballet nicht überschreibt)
+
+Anleitung: siehe README.md, Abschnitt „Schriftdateien hinzufügen“.

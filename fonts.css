@@ -1,0 +1,70 @@
+/* =====================================================================
+   SCHRIFTEN – abkd-ichliebedich
+   =====================================================================
+   Die Schriftdateien liegen selbst gehostet im Ordner /fonts/
+   (kein Laden von Google-Servern). Format: WOFF2.
+
+   So geht's:
+   1. WOFF2-Dateien in den Ordner /fonts/ legen.
+   2. Am einfachsten genau so benennen, wie unten bei url(…) angegeben –
+      dann müsst ihr hier gar nichts ändern. Sonst den Dateinamen unten
+      eintragen.
+   3. OFL.txt (Lizenz) ebenfalls in /fonts/ legen.
+
+   Solange die Dateien fehlen, greifen automatisch die Ersatzschriften
+   (siehe --schrift-akzent und --schrift-text oben in style.css).
+
+   font-display: swap  → Text ist sofort mit der Ersatzschrift lesbar und
+   wechselt zur richtigen Schrift, sobald sie geladen ist.
+   ===================================================================== */
+
+
+/* ---------- Pinyon Script (Akzentschrift) --------------------------- */
+@font-face {
+  font-family: "Pinyon Script";
+  src: url("./fonts/pinyon-script-v24-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ---------- Ballet (frühere Akzentschrift, derzeit nicht verwendet) -- */
+/* Bleibt eingebunden, damit ihr in style.css bei --schrift-akzent
+   einfach zurückwechseln könnt. Nicht verwendete Schriften lädt der
+   Browser gar nicht erst herunter. */
+/* Ballet ist eine variable Schrift mit optischer Größe – der Browser
+   wählt die passende optische Größe automatisch zur Schriftgröße.     */
+@font-face {
+  font-family: "Ballet";
+  src: url("./fonts/Ballet-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ---------- Inter (Textschrift) ------------------------------------- */
+
+/* Verwendet wird nur der Schnitt Regular. */
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ALTERNATIVE: Inter als variable Schrift (eine Datei statt Regular).
+   Wenn ihr diese nutzt: den Block oben löschen und hier die beiden
+   Kommentarzeichen (Schrägstrich-Stern am Anfang und Stern-Schrägstrich
+   am Ende) entfernen. Auch dann wird nur die Stärke Regular (400) benutzt.
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/InterVariable.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+*/

@@ -1,0 +1,745 @@
+/* =====================================================================
+   GESTALTUNG – abkd-ichliebedich
+   =====================================================================
+   ALLE Farben, Schriften, Größen, Abstände und Radien stehen hier oben
+   als Variablen. Zum Umgestalten reicht es meist, nur diesen Block zu
+   ändern. Darunter folgen die einzelnen Bausteine der Seite.
+
+   Aufbau „mobile first“: Die Grundregeln gelten fürs Handy, größere
+   Bildschirme bekommen weiter unten (@media) Ergänzungen.
+   ===================================================================== */
+
+:root {
+
+  /* ---------- FARBEN ------------------------------------------------ */
+
+  /* Zwei Farbversionen. Jede hat drei Farben:
+       -haupt       Schrift, Linien, Regler, Fehler, Fokus …
+       -flaeche     helle Fläche wie ein Textmarker: Lücken, Nutzername,
+                    Zeichenfläche, Buttons
+       -flaeche-2   etwas kräftigere Fläche: aktives Feld, Button beim Darüberfahren */
+
+  /* Version „Schwarz/Grau“ */
+  --schwarz-haupt: #000000;
+  --schwarz-flaeche: #EFEFEF;
+  --schwarz-flaeche-2: #E2E2E2;
+
+  /* Version „Pink/Rosa“ (vorher)
+     Achtung Kontrast: hellere Pinktöne sind auf Weiß schnell schlecht
+     lesbar (#E5007D erreicht knapp 4,5 : 1). */
+  --pink-haupt: #E5007D;
+  --pink-flaeche: #FDEEF6;
+  --pink-flaeche-2: #FBE0EE;
+
+  /* AKTIVE VERSION – zum Wechseln in diesen drei Zeilen
+     „schwarz“ durch „pink“ ersetzen (oder umgekehrt). */
+  --farbe-haupt: var(--schwarz-haupt);
+  --farbe-markierung: var(--schwarz-flaeche);
+  --farbe-markierung-fokus: var(--schwarz-flaeche-2);
+
+  --farbe-hintergrund: #FFFFFF;
+
+  /* Diese Farben leiten sich von der aktiven Version ab
+     (nur ändern, wenn ein Element bewusst anders aussehen soll): */
+  --farbe-text: var(--farbe-haupt);       /* gesamter Text */
+  --farbe-linie: var(--farbe-haupt);      /* Linien, Rahmen */
+  --farbe-regler: var(--farbe-haupt);     /* Schieberegler */
+  --farbe-knopf: var(--farbe-haupt);      /* Schrift der Buttons */
+  --farbe-knopf-flaeche: var(--farbe-markierung);         /* Fläche der Buttons */
+  --farbe-knopf-flaeche-hover: var(--farbe-markierung-fokus); /* … beim Darüberfahren */
+  --farbe-fokus: var(--farbe-haupt);      /* Fokus-Rahmen (Tastatur) */
+  --farbe-fehler: var(--farbe-haupt);     /* Fehlermeldungen */
+  --farbe-stift: var(--farbe-haupt);      /* Strichfarbe beim Zeichnen am Bildschirm
+                                             (exportiert wird immer in Schwarz, siehe script.js) */
+  --farbe-luecke-text: var(--farbe-text); /* Schrift in den Lücken */
+  --farbe-modus-hinweis: var(--farbe-haupt);  /* Balken „Entwurfsmodus“/„Testmodus“ */
+  --farbe-modus-hinweis-text: var(--farbe-hintergrund);
+
+  /* ---------- SCHRIFTEN --------------------------------------------- */
+  /* Schreibschrift (Pinyon Script) für Akzente, Inter für alles andere.
+     Zurück zu Ballet: bei --schrift-akzent "Pinyon Script" durch "Ballet" ersetzen.
+     Dahinter: Ersatzschriften,
+     falls die Schriftdateien (noch) fehlen. */
+  --schrift-akzent: "Pinyon Script", "Snell Roundhand", "Apple Chancery", "Segoe Script", "URW Chancery L", cursive;
+  --schrift-text: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --schriftstaerke-normal: 400;   /* Inter wird nur im Schnitt Regular verwendet */
+
+  /* ---------- SCHRIFTGRÖSSEN ---------------------------------------- */
+  /* Feste Größen für alle Bildschirmbreiten (= die bisherigen Handy-Größen
+     bei 390 px Breite, also einem üblichen iPhone). 1rem = 16 px. */
+  --groesse-text: 1rem;          /* Inter: Hinweise etc. */
+  --groesse-klein: 0.875rem;     /* Inter: Zähler, kleine Buttons */
+  --groesse-intro: 2.6rem;       /* Schreibschrift: Intro-Satz */
+  --groesse-titel: 2.35rem;      /* Schreibschrift: Überschriften */
+  --groesse-satz: 2.15rem;       /* Schreibschrift: Lückensätze und „Liebes ABKD, …“ */
+  --groesse-nutzername: 1.2rem; /* Inter: Eingabe im Feld „Dein Nutzername“
+                                   (≈ so groß wie die Eingaben in den Lücken) */
+  --groesse-knopf: 1.5rem;       /* Schreibschrift: Buttons */
+  --groesse-knopf-klein: 1.3rem; /* Schreibschrift: „anderen Satz zeigen“ */
+  --groesse-knopf-haupt: 2rem;   /* Schreibschrift: „Absenden“ */
+  --groesse-luecke: 0.56em;   /* Inter in den Lücken – relativ zur Satzgröße,
+                                 weil die Schreibschrift optisch kleiner wirkt */
+  --groesse-danke: 2.8rem;       /* Schreibschrift: Danke-Satz */
+
+  --zeilenhoehe-akzent: 1.45;    /* Schreibschrift-Texte und die Eingaben in den Lücken */
+  --zeilenhoehe-text: 1.1;       /* alle Texte, die nur in Inter gesetzt sind */
+
+  /* ---------- ABSTÄNDE ---------------------------------------------- */
+  --abstand-xs: 0.25rem;
+  --abstand-s: 0.5rem;
+  --abstand-m: 1rem;
+  --abstand-l: 2rem;
+  --abstand-xl: 4rem;
+  --abstand-xxl: 7rem;
+
+  --seitenrand: 1.25rem;                     /* Abstand zum Bildschirmrand (überall gleich) */
+
+  /* BREITE DES INHALTS AUF GROSSEN BILDSCHIRMEN – eine Variable, zwei Varianten:
+       Variante A „mittige Spalte“:   eine feste Breite, z. B. 40rem
+                                      (Spalte steht mittig, Text darin linksbündig)
+       Variante B „volle Breite“:     100%
+                                      (Inhalt läuft über die ganze Breite, mit Seitenrand)
+     Gemeint ist die Breite des Textes – der Seitenrand kommt jeweils noch dazu.
+     Auf dem Handy ändert sich dadurch nichts, weil der Bildschirm dort
+     ohnehin schmaler ist als die Spalte.
+     40rem ≈ 48 Zeichen Ballet pro Zeile in der Satzgröße. */
+  --inhalt-breite: 40rem;
+  --feld-groesse: 19rem;                     /* feste Größe von Zeichenfläche und Farbfläche
+                                                (quadratisch, auf allen Geräten gleich;
+                                                19rem = 304 px). Nur auf sehr schmalen
+                                                Handys unter 344 px Breite werden sie
+                                                kleiner, damit nichts über den Rand ragt. */
+  --einzug-saetze: 2.25rem;                   /* Einrückung der Sätze unter „Liebes ABKD, …“
+                                                (0 = keine Einrückung) */
+  --farbe-bereich-breite: 34rem;             /* maximale Breite von Farbvorschau und Reglern */
+
+  /* ---------- LINIEN & RADIEN --------------------------------------- */
+  --linie: 1.5px;          /* normale Linienstärke */
+  --linie-dick: 3px;       /* Fokus, aktive Lücke */
+  --linie-fein: 1px;       /* Schieberegler und Rahmen der Farbfläche */
+  --radius-knopf: 999px;   /* 999px = Pillenform, 0 = eckig */
+  --radius-flaeche: 0;     /* Zeichenfläche, Farbvorschau */
+  --radius-kaestchen: 0;   /* Checkbox */
+  --regler-knopf-groesse: 0.9rem;  /* Durchmesser des Reglerknopfs („Bobbel“) */
+}
+
+
+/* =====================================================================
+   GRUNDLAGEN
+   ===================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--farbe-hintergrund);
+  color: var(--farbe-text);
+  font-family: var(--schrift-text);
+  font-size: var(--groesse-text);
+  font-weight: var(--schriftstaerke-normal);
+  line-height: var(--zeilenhoehe-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--farbe-haupt);
+  color: var(--farbe-hintergrund);
+}
+
+/* Einheitlicher, gut sichtbarer Fokus für Tastaturbedienung */
+:focus-visible {
+  outline: var(--linie-dick) solid var(--farbe-fokus);
+  outline-offset: 3px;
+}
+
+/* Nur für Screenreader sichtbar */
+.nur-screenreader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =====================================================================
+   SEITE & ABSCHNITTE
+   ===================================================================== */
+
+.seite {
+  /* Inhaltsbreite + Seitenrand links und rechts; margin auto = mittig */
+  max-width: calc(var(--inhalt-breite) + 2 * var(--seitenrand));
+  margin: 0 auto;
+  padding: 0 var(--seitenrand) var(--abstand-xxl);
+}
+
+.abschnitt {
+  padding-top: var(--abstand-xxl);
+}
+
+.abschnitt--intro {
+  padding-top: var(--abstand-xl);
+}
+
+.intro-satz {
+  margin: 0;
+  font-family: var(--schrift-akzent);
+  font-size: var(--groesse-intro);
+  font-weight: var(--schriftstaerke-normal);
+  line-height: var(--zeilenhoehe-akzent);
+}
+
+.abschnitt-titel {
+  margin: 0 0 var(--abstand-s);
+  font-family: var(--schrift-akzent);
+  font-size: var(--groesse-titel);
+  font-weight: var(--schriftstaerke-normal);
+  line-height: var(--zeilenhoehe-akzent);
+}
+
+.hinweis {
+  margin: 0 0 var(--abstand-l);
+  max-width: 34em;
+}
+
+.hinweis--wichtig {
+  padding-top: var(--abstand-xl);
+  font-weight: var(--schriftstaerke-normal);
+}
+
+.fehler {
+  margin: var(--abstand-s) 0 0;
+  color: var(--farbe-fehler);
+  font-size: var(--groesse-klein);
+  font-weight: var(--schriftstaerke-normal);
+}
+
+/* kleines Ausrufezeichen vor jeder Fehlermeldung */
+.fehler::before {
+  content: "! ";
+}
+
+
+/* =====================================================================
+   MODUS-HINWEIS („Entwurfsmodus“ / „Testmodus“)
+   ===================================================================== */
+
+.modus-hinweis {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin: 0;
+  padding: var(--abstand-xs) var(--seitenrand);
+  background: var(--farbe-modus-hinweis);
+  color: var(--farbe-modus-hinweis-text);
+  font-size: var(--groesse-klein);
+  font-weight: var(--schriftstaerke-normal);
+  text-align: center;
+}
+
+
+/* =====================================================================
+   NUTZERNAME
+   ===================================================================== */
+
+.name-titel {
+  display: block;
+}
+
+/* Eingabefeld wie die Lücken: hellrosa hinterlegt, keine Linie, kein Rahmen */
+.nutzername-feld {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0;
+  padding: 0.35em 0.4em;
+  border: 0;
+  border-radius: 0;
+  background: var(--farbe-markierung);
+  color: var(--farbe-luecke-text);
+  font-family: var(--schrift-text);
+  font-size: var(--groesse-nutzername);
+  font-weight: var(--schriftstaerke-normal);
+  line-height: 1.3;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+/* aktives Feld: etwas kräftigere Markierung (wie die Lücken) */
+.nutzername-feld:focus {
+  background: var(--farbe-markierung-fokus);
+}
+
+/* vergessen oder zu kurz: gestrichelter Umriss (wie die Lücken) */
+.nutzername-feld[aria-invalid="true"] {
+  outline: var(--linie) dashed var(--farbe-fehler);
+  outline-offset: 1px;
+}
+
+.hinweis--unter-feld {
+  margin: var(--abstand-s) 0 0;
+}
+
+
+/* =====================================================================
+   LÜCKENSÄTZE
+   ===================================================================== */
+
+/* „Liebes ABKD, …“ über den Sätzen (nur Anzeige) */
+.brief-anrede {
+  margin: 0 0 var(--abstand-l);
+  font-family: var(--schrift-akzent);
+  font-size: var(--groesse-satz);
+  line-height: var(--zeilenhoehe-akzent);
+}
+
+/* Die Sätze sind gegenüber der Anrede eingerückt – wie in einem Brief */
+.satzliste {
+  margin: 0;
+  padding: 0 0 0 var(--einzug-saetze);
+  list-style: none;
+  display: grid;
+  gap: var(--abstand-xl);
+}
+
+.satz-text {
+  margin: 0;
+  font-family: var(--schrift-akzent);
+  font-size: var(--groesse-satz);
+  line-height: var(--zeilenhoehe-akzent);
+  overflow-wrap: break-word;
+}
+
+/* Eine Lücke: hellrosa hinterlegt wie mit einem Textmarker markiert.
+   Technisch ein bearbeitbares Inline-Element – es bricht deshalb wie
+   normaler Text um und wächst mit der Eingabe mit. */
+.luecke {
+  font-family: var(--schrift-text);
+  font-size: var(--groesse-luecke);
+  font-weight: var(--schriftstaerke-normal);
+  color: var(--farbe-luecke-text);
+  padding: 0.05em 0.2em;
+  background: var(--farbe-markierung);
+  -webkit-box-decoration-break: clone;   /* bei Zeilenumbruch: jede Zeile eigene Markierung */
+  box-decoration-break: clone;
+  white-space: pre-wrap;       /* Zeilenumbrüche (Umschalt+Enter) bleiben sichtbar */
+  overflow-wrap: anywhere;     /* sehr lange Wörter brechen trotzdem um */
+  caret-color: var(--farbe-haupt);
+  outline: none;
+  cursor: text;
+}
+
+/* Leere Lücke: feste Mindestbreite, damit man sie sieht und antippen kann.
+   (line-height nur, damit die leere Markierung so hoch ist wie eine gefüllte) */
+.luecke:empty {
+  display: inline-block;
+  min-width: 5em;
+  line-height: 1.2;
+}
+/* unsichtbares Zeichen, damit die leere Lücke auf der Textlinie sitzt */
+.luecke:empty::before {
+  content: "\200B";
+}
+
+/* aktive Lücke: etwas kräftigere Markierung */
+.luecke:focus {
+  background: var(--farbe-markierung-fokus);
+}
+
+/* Lücke vergessen: gestrichelter Umriss (plus Fehlermeldung unter dem Satz) */
+.luecke[aria-invalid="true"] {
+  outline: var(--linie) dashed var(--farbe-fehler);
+  outline-offset: 1px;
+}
+
+.satz-fuss {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--abstand-s) var(--abstand-m);
+  margin-top: var(--abstand-m);
+  font-size: var(--groesse-klein);
+}
+
+.zeichenzaehler {
+  font-variant-numeric: tabular-nums;
+}
+
+.zeichenzaehler--voll {
+  font-weight: var(--schriftstaerke-normal);
+}
+
+
+/* =====================================================================
+   BUTTONS
+   ===================================================================== */
+
+/* Alle Buttons: Schreibschrift auf hellgrauer Fläche, ohne Umrandung */
+.knopf {
+  display: inline-block;
+  margin: 0;
+  padding: 0.3em 0.9em 0.35em;
+  border: 0;
+  border-radius: var(--radius-knopf);
+  background: var(--farbe-knopf-flaeche);
+  color: var(--farbe-knopf);
+  font-family: var(--schrift-akzent);
+  font-size: var(--groesse-knopf);
+  font-weight: var(--schriftstaerke-normal);
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.knopf:hover {
+  background: var(--farbe-knopf-flaeche-hover);
+}
+
+.knopf--klein {
+  font-size: var(--groesse-knopf);
+}
+
+/* „anderen Satz zeigen“: gleicher Stil, etwas kleiner */
+.knopf--text {
+  font-size: var(--groesse-knopf-klein);
+}
+
+/* Absenden: gleicher Stil, größer */
+.knopf--haupt {
+  margin-top: var(--abstand-l);
+  padding: 0.3em 1.2em 0.35em;
+  font-size: var(--groesse-knopf-haupt);
+}
+
+/* während des Sendens */
+.knopf[aria-busy="true"],
+.knopf:disabled {
+  cursor: progress;
+}
+
+.knopfleiste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--abstand-s);
+  margin-top: var(--abstand-m);
+}
+
+
+/* =====================================================================
+   ZEICHENFLÄCHE
+   ===================================================================== */
+
+/* Die rosa Fläche ist nur der CSS-Hintergrund – sie gehört nicht zur
+   Zeichnung und erscheint nicht im Export (SVG/PNG bleiben transparent). */
+.zeichenflaeche {
+  width: var(--feld-groesse);
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--farbe-markierung);
+  border-radius: var(--radius-flaeche);
+  overflow: hidden;
+}
+
+.zeichenflaeche-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;          /* WICHTIG: Seite scrollt beim Zeichnen nicht */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  cursor: crosshair;
+}
+
+.zeichenflaeche--fehler {
+  outline: var(--linie) dashed var(--farbe-fehler);
+  outline-offset: 3px;
+}
+
+
+/* =====================================================================
+   FARBE (CMYK)
+   ===================================================================== */
+
+.farbvorschau {
+  width: var(--feld-groesse);
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  border: var(--linie-fein) solid var(--farbe-linie);
+  border-radius: var(--radius-flaeche);
+  background: #FFFFFF;
+}
+
+.farbwerte {
+  margin: var(--abstand-s) 0 var(--abstand-l);
+  font-size: var(--groesse-klein);
+  font-variant-numeric: tabular-nums;
+}
+
+.regler-gruppe {
+  max-width: var(--farbe-bereich-breite);
+  display: grid;
+  gap: var(--abstand-s);
+}
+
+.regler {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  align-items: center;
+  gap: var(--abstand-m);
+}
+
+.regler-name {
+  font-weight: var(--schriftstaerke-normal);
+  line-height: var(--zeilenhoehe-text);
+}
+
+.regler-langname {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: var(--schriftstaerke-normal);
+}
+
+/* Schieberegler: dünne Linie mit rundem Knopf, ohne Standard-Optik */
+.regler-schieber {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2.75rem;             /* großzügige Tippfläche am Handy */
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.regler-schieber:focus-visible {
+  outline: none;               /* Fokus wird am Knopf gezeigt (siehe unten) */
+}
+
+/* Chrome, Safari, Edge */
+.regler-schieber::-webkit-slider-runnable-track {
+  height: var(--linie-fein);
+  background: var(--farbe-regler);
+}
+.regler-schieber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--regler-knopf-groesse);
+  height: var(--regler-knopf-groesse);
+  margin-top: calc((var(--linie-fein) - var(--regler-knopf-groesse)) / 2);
+  border: 0;
+  border-radius: 50%;
+  background: var(--farbe-regler);
+}
+.regler-schieber:focus-visible::-webkit-slider-thumb {
+  outline: var(--linie-dick) solid var(--farbe-fokus);
+  outline-offset: 3px;
+}
+
+/* Firefox */
+.regler-schieber::-moz-range-track {
+  height: var(--linie-fein);
+  background: var(--farbe-regler);
+}
+.regler-schieber::-moz-range-thumb {
+  width: var(--regler-knopf-groesse);
+  height: var(--regler-knopf-groesse);
+  border: 0;
+  border-radius: 50%;
+  background: var(--farbe-regler);
+}
+.regler-schieber:focus-visible::-moz-range-thumb {
+  outline: var(--linie-dick) solid var(--farbe-fokus);
+  outline-offset: 3px;
+}
+
+.regler-zahl-rahmen {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15em;
+}
+
+/* Zahlenfeld: hellgrau hinterlegt wie die Lücken, ohne Linie */
+.regler-zahl {
+  width: 3.2em;
+  padding: var(--abstand-xs) 0.3em;
+  border: 0;
+  border-radius: 0;
+  background: var(--farbe-markierung);
+  color: var(--farbe-text);
+  font-family: var(--schrift-text);
+  font-size: var(--groesse-text);
+  font-weight: var(--schriftstaerke-normal);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.regler-zahl::-webkit-inner-spin-button,
+.regler-zahl::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* aktives Feld: etwas kräftigere Fläche (wie die Lücken) */
+.regler-zahl:focus {
+  outline: none;
+  background: var(--farbe-markierung-fokus);
+}
+
+
+/* =====================================================================
+   EINVERSTÄNDNIS & ABSENDEN
+   ===================================================================== */
+
+.einverstaendnis {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--abstand-m);
+}
+
+.einverstaendnis-feld {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  border: var(--linie) solid var(--farbe-linie);
+  border-radius: var(--radius-kaestchen);
+  background: transparent center / 75% no-repeat;
+  cursor: pointer;
+}
+/* Haken: weißes Häkchen auf pinkem Grund (als eingebettete Grafik) */
+.einverstaendnis-feld:checked {
+  background-color: var(--farbe-haupt);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E");
+}
+.einverstaendnis-feld[aria-invalid="true"] {
+  border-style: dashed;
+}
+
+.einverstaendnis-text {
+  max-width: 34em;
+  cursor: pointer;
+}
+
+/* Spam-Schutz: Feld aus dem sichtbaren Bereich schieben */
+.honigtopf {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.fehler--sammel {
+  margin-top: var(--abstand-l);
+}
+
+.sendefehler {
+  margin-top: var(--abstand-l);
+}
+.sendefehler-text {
+  margin: 0 0 var(--abstand-m);
+  font-weight: var(--schriftstaerke-normal);
+}
+
+
+/* =====================================================================
+   DANKE-SEITE
+   ===================================================================== */
+
+.danke {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.danke-satz {
+  margin: 0;
+  font-family: var(--schrift-akzent);
+  font-size: var(--groesse-danke);
+  line-height: var(--zeilenhoehe-akzent);
+}
+
+
+/* =====================================================================
+   GRÖSSERE BILDSCHIRME
+   ===================================================================== */
+
+/* „Die Sätze werden geladen …“ steht eingerückt wie die Sätze */
+.satz-laden {
+  padding-left: var(--einzug-saetze);
+}
+
+@media (min-width: 48em) {
+  .abschnitt--intro {
+    padding-top: var(--abstand-xxl);
+  }
+  .regler {
+    grid-template-columns: 7rem 1fr auto;
+  }
+}
+
+
+/* =====================================================================
+   ZEICHENFLÄCHE UND FARBE NEBENEINANDER (größere Bildschirme)
+   =====================================================================
+   Beide Abschnitte stehen in zwei gleich breiten Spalten. Durch
+   „subgrid“ liegen Überschrift, Hinweis und Feld jeweils auf gleicher
+   Höhe – auch wenn die Überschriften unterschiedlich lang sind.
+   Auf dem Handy bleibt alles untereinander wie bisher.
+   Wer das nicht möchte: diesen ganzen Block löschen.
+   ===================================================================== */
+
+@media (min-width: 48em) {
+  .felder-paar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, var(--feld-groesse)));
+    justify-content: start;
+    column-gap: var(--abstand-l);
+  }
+
+  .felder-paar > .abschnitt {
+    grid-row: 1 / span 5;
+    display: grid;
+    grid-template-rows: subgrid;    /* Zeilen: Titel, Hinweis, Feld, darunter 2 Zeilen */
+    align-content: start;
+  }
+
+  .felder-paar .regler-gruppe {
+    max-width: var(--feld-groesse);
+  }
+
+  /* schmalere Spalte: „Rückgängig“ und „Neu anfangen“ etwas kleiner,
+     damit sie nebeneinander passen */
+  .felder-paar .knopfleiste .knopf {
+    font-size: var(--groesse-knopf-klein);
+  }
+
+  /* schmalere Spalte: Regler wie auf dem Handy */
+  .felder-paar .regler {
+    grid-template-columns: 4.5rem 1fr auto;
+    gap: var(--abstand-s);
+  }
+}

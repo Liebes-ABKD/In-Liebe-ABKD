@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Für Suchmaschinen gesperrt: die Umfrage wird nur über den Link verteilt -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>abkd-ichliebedich</title>
+  <!-- PLATZHALTER: kurze Beschreibung (erscheint z. B. in Link-Vorschauen) -->
+  <meta name="description" content="Eine kollektive Liebeserklärung an das Kommunikationsdesign. Mach mit!">
+
+  <!-- ===================================================================
+       LINK-VORSCHAU (WhatsApp, Instagram, Mail …)
+       Ohne Vorschaubild: Beim Teilen erscheinen nur Titel und Beschreibung.
+       Achtung: og:url braucht eine VOLLE Adresse (mit https://). Das ist
+       die einzige Stelle, an der ihr beim Umzug auf die eigene Domain etwas
+       ändern müsst.
+       =================================================================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="abkd-ichliebedich">
+  <meta property="og:title" content="abkd-ichliebedich">
+  <!-- PLATZHALTER: Beschreibungstext der Vorschau -->
+  <meta property="og:description" content="Eine kollektive Liebeserklärung an das Kommunikationsdesign. Mach mit!">
+  <meta property="og:url" content="https://abkd-ichliebedich.github.io/abkd-ichliebedich/">
+  <meta name="twitter:card" content="summary">
+
+  <!-- Kein Favicon: Diese Zeile verhindert nur, dass der Browser von sich
+       aus nach einer Datei „favicon.ico“ sucht (und eine Fehlermeldung zeigt). -->
+  <link rel="icon" href="data:,">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Schriften und Gestaltung -->
+  <link rel="stylesheet" href="./fonts.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Hinweis „Entwurfsmodus“ / „Testmodus“ – wird per Script eingeblendet -->
+  <p class="modus-hinweis" id="modus-hinweis" hidden></p>
+
+  <main class="seite" id="inhalt">
+
+    <noscript>
+      <p class="hinweis hinweis--wichtig">Bitte aktiviere JavaScript, um an der Umfrage teilzunehmen.</p>
+    </noscript>
+
+    <!-- novalidate: Wir prüfen die Eingaben selbst (schönere Fehlermeldungen) -->
+    <form class="umfrage" id="umfrage" novalidate>
+
+      <!-- 1. INTRO ======================================================= -->
+      <section class="abschnitt abschnitt--intro">
+        <h1 class="intro-satz">Keine Sorge, das bleibt ganz unter uns – und unter allen, die unsere Publikation lesen.</h1>
+      </section>
+
+
+      <!-- 2. NUTZERNAME ==================================================== -->
+      <section class="abschnitt abschnitt--name">
+        <label class="abschnitt-titel name-titel" for="nutzername">Dein Nutzername</label>
+        <input class="nutzername-feld" type="text" id="nutzername" name="nutzername"
+               autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="next"
+               aria-required="true" aria-describedby="hinweis-name fehler-name">
+        <p class="hinweis hinweis--unter-feld" id="hinweis-name">Kein echter Name nötig – Spitzname, Fantasiename, alles erlaubt. Er erscheint in der Publikation unter deinen Antworten.</p>
+        <p class="fehler" id="fehler-name" hidden>Bitte gib einen Nutzernamen mit 2 bis 30 Zeichen ein.</p>
+      </section>
+
+
+      <!-- 3. LÜCKENSÄTZE ================================================== -->
+      <section class="abschnitt abschnitt--saetze" aria-labelledby="titel-saetze">
+        <!-- PLATZHALTER: Überschrift und Hinweis -->
+        <h2 class="abschnitt-titel" id="titel-saetze">Fünf Sätze</h2>
+        <p class="hinweis" id="hinweis-saetze">Füll alle Lücken aus. Gefällt dir ein Satz nicht, lass dir einfach einen anderen zeigen.</p>
+
+        <!-- Briefanrede: nur Anzeige, wird NICHT mit den Antworten gespeichert -->
+        <p class="brief-anrede">Liebes ABKD, …</p>
+
+        <!-- Erscheint nur kurz, falls die Sätze noch ausgewählt werden -->
+        <p class="hinweis satz-laden" id="saetze-laden" hidden>Die Sätze werden geladen …</p>
+
+        <!-- Die 5 Sätze werden von script.js hier eingesetzt -->
+        <ol class="satzliste" id="satzliste"></ol>
+
+        <!-- Für Screenreader: kündigt einen neu gezeigten Satz an -->
+        <p class="nur-screenreader" id="satz-ansage" aria-live="polite"></p>
+      </section>
+
+
+      <!-- Zeichenfläche und Farbe: auf dem Handy untereinander,
+           auf größeren Bildschirmen nebeneinander (siehe style.css) -->
+      <div class="felder-paar">
+
+      <!-- 4. ZEICHNUNG: BEZIEHUNG ZU ABKD =================================== -->
+      <section class="abschnitt abschnitt--symbol" aria-labelledby="titel-symbol">
+        <h2 class="abschnitt-titel" id="titel-symbol">Zeichne deine Beziehung zu ABKD</h2>
+        <p class="hinweis" id="hinweis-symbol">Mit dem Finger oder der Maus – wie beim Unterschreiben für den Postboten.</p>
+
+        <div class="zeichenflaeche" id="zeichenflaeche-rahmen">
+          <canvas class="zeichenflaeche-canvas" id="zeichenflaeche"
+                  role="img" aria-label="Zeichenfläche für deine Beziehung zu ABKD"
+                  aria-describedby="hinweis-symbol"></canvas>
+        </div>
+
+        <div class="knopfleiste">
+          <button type="button" class="knopf knopf--klein" id="zeichnung-zurueck">Rückgängig</button>
+          <button type="button" class="knopf knopf--klein" id="zeichnung-neu">Neu anfangen</button>
+        </div>
+
+        <p class="fehler" id="fehler-symbol" hidden>Bitte zeichne deine Beziehung zu ABKD.</p>
+      </section>
+
+
+      <!-- 5. FARBE DER LIEBE ============================================== -->
+      <section class="abschnitt abschnitt--farbe" aria-labelledby="titel-farbe">
+        <h2 class="abschnitt-titel" id="titel-farbe">Gib deine momentane Stimmung als Farbe in CMYK an.</h2>
+        <p class="hinweis" id="hinweis-farbe">Misch deine Farbe in CMYK. Die Darstellung am Bildschirm ist nur eine Annäherung an die gedruckte Farbe.</p>
+
+        <!-- Große Live-Vorschau -->
+        <div class="farbvorschau" id="farbvorschau" aria-hidden="true"></div>
+        <p class="farbwerte" id="farbwerte" aria-live="polite">C 0 · M 0 · Y 0 · K 0 · #FFFFFF</p>
+
+        <!-- Vier Regler, jeweils mit Zahlenfeld -->
+        <div class="regler-gruppe" role="group" aria-labelledby="titel-farbe" aria-describedby="hinweis-farbe">
+
+          <div class="regler" data-kanal="c">
+            <label class="regler-name" for="regler-c">C <span class="regler-langname">Cyan</span></label>
+            <input class="regler-schieber" type="range" id="regler-c" min="0" max="100" step="1" value="0">
+            <span class="regler-zahl-rahmen">
+              <input class="regler-zahl" type="number" id="zahl-c" min="0" max="100" step="1" value="0" inputmode="numeric" aria-label="Cyan in Prozent">
+              <span class="regler-einheit" aria-hidden="true">%</span>
+            </span>
+          </div>
+
+          <div class="regler" data-kanal="m">
+            <label class="regler-name" for="regler-m">M <span class="regler-langname">Magenta</span></label>
+            <input class="regler-schieber" type="range" id="regler-m" min="0" max="100" step="1" value="0">
+            <span class="regler-zahl-rahmen">
+              <input class="regler-zahl" type="number" id="zahl-m" min="0" max="100" step="1" value="0" inputmode="numeric" aria-label="Magenta in Prozent">
+              <span class="regler-einheit" aria-hidden="true">%</span>
+            </span>
+          </div>
+
+          <div class="regler" data-kanal="y">
+            <label class="regler-name" for="regler-y">Y <span class="regler-langname">Yellow</span></label>
+            <input class="regler-schieber" type="range" id="regler-y" min="0" max="100" step="1" value="0">
+            <span class="regler-zahl-rahmen">
+              <input class="regler-zahl" type="number" id="zahl-y" min="0" max="100" step="1" value="0" inputmode="numeric" aria-label="Yellow in Prozent">
+              <span class="regler-einheit" aria-hidden="true">%</span>
+            </span>
+          </div>
+
+          <div class="regler" data-kanal="k">
+            <label class="regler-name" for="regler-k">K <span class="regler-langname">Key (Schwarz)</span></label>
+            <input class="regler-schieber" type="range" id="regler-k" min="0" max="100" step="1" value="0">
+            <span class="regler-zahl-rahmen">
+              <input class="regler-zahl" type="number" id="zahl-k" min="0" max="100" step="1" value="0" inputmode="numeric" aria-label="Key (Schwarz) in Prozent">
+              <span class="regler-einheit" aria-hidden="true">%</span>
+            </span>
+          </div>
+
+        </div>
+      </section>
+
+      </div><!-- Ende felder-paar -->
+
+
+      <!-- 6. ABSENDEN ===================================================== -->
+      <section class="abschnitt abschnitt--absenden" aria-label="Absenden">
+
+        <div class="einverstaendnis">
+          <input class="einverstaendnis-feld" type="checkbox" id="einverstanden" name="einverstanden" aria-describedby="fehler-einverstanden">
+          <label class="einverstaendnis-text" for="einverstanden">Ich bin einverstanden, dass meine Antworten, meine Zeichnung, meine Farbe und mein Nutzername gespeichert und in der Publikation möglicherweise veröffentlicht werden. Echte Namen oder Adressen sammeln wir nicht.</label>
+        </div>
+        <p class="fehler" id="fehler-einverstanden" hidden>Bitte bestätige dein Einverständnis.</p>
+
+        <!-- Spam-Schutz („Honigtopf“): für Menschen unsichtbar, Bots füllen es aus. NICHT entfernen. -->
+        <div class="honigtopf" aria-hidden="true">
+          <label for="website">Bitte dieses Feld leer lassen</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- Sammelmeldung, falls noch etwas fehlt -->
+        <p class="fehler fehler--sammel" id="fehler-sammel" role="alert" hidden></p>
+
+        <button type="submit" class="knopf knopf--haupt" id="absenden">Absenden</button>
+
+        <!-- Fehler beim Senden (z. B. keine Verbindung) -->
+        <div class="sendefehler" id="sendefehler" role="alert" hidden>
+          <p class="sendefehler-text" id="sendefehler-text">Das hat leider nicht geklappt. Deine Eingaben sind noch da – bitte versuch es noch einmal.</p>
+          <button type="button" class="knopf" id="erneut-senden">Erneut versuchen</button>
+        </div>
+      </section>
+
+    </form>
+
+
+    <!-- 7. DANKE-SEITE ===================================================== -->
+    <section class="danke" id="danke" tabindex="-1" hidden>
+      <p class="danke-satz">Danke!</p>
+    </section>
+
+  </main>
+
+  <!-- Reihenfolge wichtig: erst Einstellungen und Daten, dann das Hauptscript -->
+  <script src="./config.js"></script>
+  <script src="./saetze.js"></script>
+  <script src="./lib/signature_pad.umd.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
